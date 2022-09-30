@@ -12,6 +12,8 @@ public class Servico implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String descricao;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
@@ -20,8 +22,9 @@ public class Servico implements Serializable {
 
     private CategoriaServico categoriaServico;
 
-    public Servico(Integer id, Cliente cliente, StatusServico statusServico, CategoriaServico categoriaServico) {
+    public Servico(Integer id, String descricao, Cliente cliente, StatusServico statusServico, CategoriaServico categoriaServico) {
         this.id = id;
+        this.descricao = descricao;
         this.cliente = cliente;
         this.statusServico = statusServico;
         this.categoriaServico = categoriaServico;
@@ -37,6 +40,14 @@ public class Servico implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Cliente getCliente() {
