@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,19 @@ public class ServicoResource {
 
     @GetMapping
     public ResponseEntity<List<Servico>> findAll() {
+
         return ResponseEntity.ok().body(service.findAll());
+    }
+
+    @GetMapping(value = "idCliente/{id}")
+    public ResponseEntity<List<Servico>> findIdClienteAll(@PathVariable Integer id) {
+        List<Servico> servicos = new ArrayList<>();
+        for (Servico s: service.findAll()) {
+            if (s.getCliente().getId() == id) {
+                servicos.add(s);
+            }
+        }
+        return ResponseEntity.ok().body(servicos);
     }
 
     @GetMapping(value = "/{id}")
